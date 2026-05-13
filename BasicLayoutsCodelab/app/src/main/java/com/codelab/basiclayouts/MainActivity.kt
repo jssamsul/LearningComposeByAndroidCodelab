@@ -22,8 +22,15 @@ import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codelab.basiclayouts.ui.theme.MySootheTheme
@@ -40,7 +47,16 @@ class MainActivity : ComponentActivity() {
 fun SearchBar(
     modifier: Modifier = Modifier
 ) {
-    // Implement composable here
+    TextField(value = "",
+              onValueChange = {},
+              modifier = modifier,
+              placeholder = {
+                  Text(stringResource(R.string.placeholder_search))
+              },
+              leadingIcon = {
+                  Icon(imageVector = Icons.Default.Search, contentDescription = null)
+              },
+              colors = TextFieldDefaults.colors())
 }
 
 // Step: Align your body - Alignment
@@ -148,7 +164,7 @@ fun SearchBarPreview() {
     MySootheTheme { SearchBar(Modifier.padding(8.dp)) }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+//@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun AlignYourBodyElementPreview() {
     MySootheTheme {
@@ -158,7 +174,7 @@ fun AlignYourBodyElementPreview() {
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+//@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun FavoriteCollectionCardPreview() {
     MySootheTheme {
@@ -168,49 +184,49 @@ fun FavoriteCollectionCardPreview() {
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+//@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun FavoriteCollectionsGridPreview() {
     MySootheTheme { FavoriteCollectionsGrid() }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+//@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun AlignYourBodyRowPreview() {
     MySootheTheme { AlignYourBodyRow() }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+//@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun HomeSectionPreview() {
     MySootheTheme { HomeSection() }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+//@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun ScreenContentPreview() {
     MySootheTheme { HomeScreen() }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+//@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun BottomNavigationPreview() {
     MySootheTheme { SootheBottomNavigation(Modifier.padding(top = 24.dp)) }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+//@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun NavigationRailPreview() {
     MySootheTheme { SootheNavigationRail() }
 }
 
-@Preview(widthDp = 360, heightDp = 640)
+//@Preview(widthDp = 360, heightDp = 640)
 @Composable
 fun MySoothePortraitPreview() {
     MySootheAppPortrait()
 }
 
-@Preview(widthDp = 640, heightDp = 360)
+//@Preview(widthDp = 640, heightDp = 360)
 @Composable
 fun MySootheLandscapePreview() {
     MySootheAppLandscape()
