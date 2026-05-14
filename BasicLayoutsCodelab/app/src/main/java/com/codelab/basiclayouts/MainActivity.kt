@@ -159,10 +159,10 @@ fun FavoriteCollectionsGrid(
 ) {
     LazyHorizontalGrid(
             rows = GridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = modifier.height(120.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp)
+            contentPadding = PaddingValues(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = modifier.height(168.dp)
     ) {
         items(favoriteCollectionsData) { item ->
             FavoriteCollectionCard(item.drawable, item.text)
