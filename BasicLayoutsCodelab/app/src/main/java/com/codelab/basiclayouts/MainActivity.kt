@@ -58,6 +58,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -70,9 +74,13 @@ import androidx.compose.ui.unit.dp
 import com.codelab.basiclayouts.ui.theme.MySootheTheme
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { MySootheApp() }
+
+        setContent {
+            val windowSizeClass = calculateWindowSizeClass(this)
+            MySootheApp(windowSizeClass) }
     }
 }
 
@@ -243,7 +251,10 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
 // Step: MySoothe App - Scaffold
 @Composable
 fun MySootheAppPortrait() {
-    // Implement composable here
+    Scaffold(
+            bottomBar = { SootheBottomNavigation() }
+
+    ) { innerPadding -> HomeScreen(Modifier.padding(innerPadding)) }
 }
 
 // Step: Bottom navigation - Material
@@ -299,20 +310,28 @@ fun MySootheAppLandscape() {
 
 // Step: MySoothe App
 @Composable
-fun MySootheApp() {
-    Scaffold(
-            bottomBar = { SootheBottomNavigation() }
+fun MySootheApp(windowSizeClass: WindowSizeClass) {
+    when(windowSizeClass.widthSizeClass){
+        WindowWidthSizeClass.Compact -> {
+            MySootheAppPortrait()
+        }
+        WindowWidthSizeClass.Expanded -> {
+            MySootheAppLandscape()
+        }
+        WindowWidthSizeClass.Medium -> {
+            MySootheAppLandscape()
+        }
+    }
 
-    ) { innerPadding -> HomeScreen(Modifier.padding(innerPadding)) }
 }
 
-@Preview(widthDp = 360, heightDp = 640)
+/*@Preview(widthDp = 360, heightDp = 640)
 @Composable
 fun MySootheAppPreview() {
     MySootheTheme() {
         MySootheApp()
     }
-}
+}*/
 
 private val alignYourBodyData = listOf(
         R.drawable.ab1_inversions to R.string.ab1_inversions,
@@ -379,7 +398,7 @@ fun AlignYourBodyRowPreview() {
     MySootheTheme { AlignYourBodyRow() }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+//@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun HomeSectionPreview() {
     MySootheTheme {
@@ -389,25 +408,25 @@ fun HomeSectionPreview() {
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE, heightDp = 180)
+//@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE, heightDp = 180)
 @Composable
 fun ScreenContentPreview() {
     MySootheTheme { HomeScreen() }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+//@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun BottomNavigationPreview() {
     MySootheTheme { SootheBottomNavigation(Modifier.padding(top = 24.dp)) }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+//@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun NavigationRailPreview() {
     MySootheTheme { SootheNavigationRail() }
 }
 
-//@Preview(widthDp = 360, heightDp = 640)
+@Preview(widthDp = 360, heightDp = 640)
 @Composable
 fun MySoothePortraitPreview() {
     MySootheAppPortrait()
